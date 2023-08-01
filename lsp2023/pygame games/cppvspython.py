@@ -68,8 +68,10 @@ while running:
         bc+=1
     if bp == 5:
         pygame.quit()
+        exit()
     if bc == 5:
         pygame.quit()
+        exit()
 
     
     if key[pygame.K_LEFT] and xc>0:
@@ -93,24 +95,25 @@ while running:
         xp+=4
     
     if key[pygame.K_m]:
-        pbcx = xc
+        pbcy = yc
         shootingc = True
         bcx=xc
         
-        screen.blit(cbeam1, (bcx-30, yc+50))
+        screen.blit(cbeam1, (bcx-30, pbcy+50))
     if shootingc == True:
         bcx-=5
-        screen.blit(cbeam1, (bcx-30, yc+50))
+        screen.blit(cbeam1, (bcx-30, pbcy+50))
     else:
         shootingc = False
     if key[pygame.K_q]:
+        pbcy = yp
         shootingp = True
         bpx=xp
         
-        screen.blit(pbeam1, (bpx+150, yc+50))
+        screen.blit(pbeam1, (bpx+150, pbpy+50))
     if shootingc == True:
         bpx+=3
-        screen.blit(pbeam1, (bpx+150, yc+50))
+        screen.blit(pbeam1, (bpx+150, pbpy+50))
     else:
         shootingc = False
     screen.blit(cp3, (xc, yc))
