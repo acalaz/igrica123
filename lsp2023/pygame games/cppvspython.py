@@ -47,11 +47,14 @@ pbeam1 = pygame.transform.rotate(cbeam1, 180)
 cpp = cp3.get_rect()     #ovo je za collision koje sad probam
 pyt = pyt4.get_rect()
 cbeam = cbeam1.get_rect()
+cbeam.left = 500
 pbeam = pbeam1.get_rect()
+pbeam.left = 800
                         #ovo je za collision koje sad probam
 key = pygame.key.get_pressed() #za tastatu
 dyyc = 0.5 # Brzina gravitacije 0.01
 dyyp = 0.5 #
+
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -63,10 +66,22 @@ while running:
     screen.fill("white")
     key = pygame.key.get_pressed()
     # RENDER YOUR GAME HERE
-    #if cpp.collidedict(pbeam)  #####nije gotovo. Ovo je da li je pythonov metak pogodio cpp
-    if bcx == xp+200 and bcy == yp:  #od 64 do 73 linije proverava da li je metak pogdio u cpp odnosno python
-        bp+=1                        #ne radi bas kako treba tako da sad probam sa collidedict
-    if bpx == xc-200 and bpy == yc:
+    #if cpp.collidedict(pbeam):######nije gotovo. Ovo je da li je pythonov metak pogodio cpp
+        #bc+=1
+    #print(pbeam.left)
+    #if pygame.Rect(xp,yp, 166, 166).colliderect(pygame.Rect(bcx, pbcy, 116,71)):  #od 64 do 73 linije proverava da li je metak pogdio u cpp odnosno python
+    #    pbcy = -300
+    #    bp+=1            
+    
+    #if pygame.Rect(xc,yc, 166, 166).colliderect(pygame.Rect(bpx, pbpy, 116,71)):  #od 64 do 73 linije proverava da li je metak pogdio u cpp odnosno python
+    #    pbpy = -300
+    #    bc+=1            
+        
+    bcy = yc
+    bpy = yp
+    if bcx == xp+180 and (bcy <= yp+10 or bcy >= yp-10):
+        bp+=1
+    if bpx+116 == xc and (bpy <= yc+10 or bpy >= yc-10):
         bc+=1
     if bp == 5:
         pygame.quit()
@@ -109,7 +124,7 @@ while running:
         shootingc = True
         bcx=xc
     #pucanje cpp
-        screen.blit(cbeam1, (bcx-30, pbcy+50))
+        screen.blit(cbeam1, (xc-30, pbcy+50))
     if shootingc == True:
         bcx-=5
         screen.blit(cbeam1, (bcx-30, pbcy+50))
@@ -118,11 +133,10 @@ while running:
     #pucanje cpp
     #\/ pucanje pythona
     if key[pygame.K_q]:
-        pbcy = yp
+        pbpy = yp
         shootingp = True
         bpx=xp
-        
-        screen.blit(pbeam1, (bpx+150, pbpy+50))
+        screen.blit(pbeam1, (xp+150, pbpy+50))
     if shootingc == True:
         bpx+=3
         screen.blit(pbeam1, (bpx+150, pbpy+50))
@@ -132,9 +146,8 @@ while running:
     screen.blit(cp3, (xc, yc))#prikazianje
     screen.blit(pyt4, (xp, yp))
     pygame.display.update()
-
+    print(bpy)
     pbcx = xc
     pbpx = xp
     clock.tick(60)  # limits FPS to 60
-    print(yp, yc) #ovo sam ispisivao y kordinate zbog nekog testa
 pygame.quit()
